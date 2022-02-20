@@ -28,7 +28,6 @@ public class InteractWithWorldButton : MonoBehaviour
                 if (_gazedAtObject != hit.transform.gameObject)
                 {
                     _gazedAtObject = hit.transform.gameObject;// store new GameObject
-                    Debug.Log("gazed object : " + _gazedAtObject);
                 }
                 // check if there's no object stored in gazedAtObject
                 else if (_gazedAtObject != null)
