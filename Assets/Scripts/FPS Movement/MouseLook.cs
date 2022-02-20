@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class MouseLook : MonoBehaviour
 {
@@ -10,17 +11,28 @@ public class MouseLook : MonoBehaviour
     [SerializeField] new Camera camera;
     [SerializeField] float defaultFOV;
 
+    private PhotonView photonView;
+
     float xRotation = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        photonView = GetComponentInParent<PhotonView>();
+        if (!photonView.IsMine) {
+            Destroy(gameObject);
+            return;
+        }
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine) {
+            return;
+        }
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
@@ -33,6 +45,14 @@ public class MouseLook : MonoBehaviour
         else if (mouseScrollWheel < 0)
         {
             camera.fieldOfView++;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0)) {
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse2))

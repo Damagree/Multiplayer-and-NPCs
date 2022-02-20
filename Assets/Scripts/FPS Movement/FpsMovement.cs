@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class FpsMovement : MonoBehaviour
 {
@@ -13,12 +14,21 @@ public class FpsMovement : MonoBehaviour
     [SerializeField] float groundDistance = 0.4f;
     [SerializeField] LayerMask groundMask;
 
+    private PhotonView photonView;
+
     Vector3 velocity;
     bool isGrounded;
+
+    private void Awake() {
+        photonView = GetComponent<PhotonView>();
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!photonView.IsMine)
+            return;
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
