@@ -776,6 +776,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 177195934}
     m_Modifications:
+    - target: {fileID: 170356568714671714, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
+      propertyPath: checkPhoton
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 170356568777522045, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
       propertyPath: inkJSONAsset
       value: 
@@ -1029,6 +1033,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 177195934}
     m_Modifications:
+    - target: {fileID: 170356568714671714, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
+      propertyPath: checkPhoton
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 420949231816602274, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1543,6 +1551,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 177195934}
     m_Modifications:
+    - target: {fileID: 170356568714671714, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
+      propertyPath: checkPhoton
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 170356568777522045, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
       propertyPath: inkJSONAsset
       value: 
@@ -2185,6 +2197,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 177195934}
     m_Modifications:
+    - target: {fileID: 170356568714671714, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
+      propertyPath: checkPhoton
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 170356568777522045, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
       propertyPath: inkJSONAsset
       value: 
@@ -3712,6 +3728,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 177195934}
     m_Modifications:
+    - target: {fileID: 170356568714671714, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
+      propertyPath: checkPhoton
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 170356568777522045, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
       propertyPath: inkJSONAsset
       value: 
@@ -4290,6 +4310,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 177195934}
     m_Modifications:
+    - target: {fileID: 170356568714671714, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
+      propertyPath: checkPhoton
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 420949231816602274, guid: 8287d539335c1c047adae47ae69f1cc6, type: 3}
       propertyPath: m_RootOrder
       value: 0
