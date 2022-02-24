@@ -11,6 +11,7 @@ public class MouseLook : MonoBehaviour
     [SerializeField] new Camera camera;
     [SerializeField] float defaultFOV;
 
+    [SerializeField] GameObject[] destroyOnNotMine;
     private PhotonView photonView;
 
     float xRotation = 0f;
@@ -20,10 +21,12 @@ public class MouseLook : MonoBehaviour
     {
         photonView = GetComponentInParent<PhotonView>();
         if (!photonView.IsMine) {
+            foreach (GameObject item in destroyOnNotMine) {
+                Destroy(item);
+            }
             Destroy(gameObject);
             return;
         }
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -49,10 +52,6 @@ public class MouseLook : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
             Cursor.lockState = CursorLockMode.None;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0)) {
-            Cursor.lockState = CursorLockMode.Locked;
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse2))

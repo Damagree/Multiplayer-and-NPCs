@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Events;
+using Photon.Pun;
 
 public class ShortcutController : MonoBehaviour
 {
@@ -12,7 +13,20 @@ public class ShortcutController : MonoBehaviour
         public UnityEvent eventTrigger;
     };
 
+    [Header("If using Photon")]
+    [SerializeField] bool isUsingPhoton = true;
+    [SerializeField] PhotonView photonView;
+
     [SerializeField] List<Shortcut> shortcuts;
+
+    private void Start() {
+        if (!isUsingPhoton) {
+            return;
+        }
+        if (!photonView.IsMine) {
+            Destroy(gameObject);
+        }
+    }
 
     // Update is called once per frame
     void Update()

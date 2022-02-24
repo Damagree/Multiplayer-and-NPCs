@@ -6,6 +6,7 @@ TagManager:
   tags:
   - World Button
   - Interactable
+  - Cinemachine
   layers:
   - Default
   - TransparentFX

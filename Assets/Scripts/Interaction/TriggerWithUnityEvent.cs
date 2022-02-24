@@ -13,6 +13,9 @@ public class TriggerWithUnityEvent : MonoBehaviour {
 
     [SerializeField] bool checkPhoton = false;
 
+    [SerializeField] bool isSendMessageOnEnter;
+    [SerializeField] string message;
+
     private void OnTriggerEnter(Collider other) {
         if (!other.gameObject.CompareTag(targetTag)) return;
 
@@ -24,6 +27,7 @@ public class TriggerWithUnityEvent : MonoBehaviour {
         if (!other.gameObject.GetComponent<PhotonView>().IsMine) return;
 
         onTriggerEnter.Invoke();
+        other.SendMessage(message);
     }
 
     private void OnTriggerExit(Collider other) {

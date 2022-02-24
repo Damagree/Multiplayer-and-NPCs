@@ -306,6 +306,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  checkPhoton: 1
+  isSendMessageOnEnter: 1
+  message: SwitchCinemachineLock
 --- !u!54 &170356568714671726
 Rigidbody:
   m_ObjectHideFlags: 0

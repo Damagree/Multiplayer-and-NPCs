@@ -587,12 +587,16 @@ MonoBehaviour:
   controller: {fileID: 5794136288482887344}
   speed: 12
   gravity: -9.81
+  usingJump: 0
   jumpHeight: 3
   groundCheck: {fileID: 5794136287323003526}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  usingAnimation: 0
+  targetAnimator: {fileID: 0}
+  usingWalkAnimation: 0
 --- !u!114 &1291902035922613656
 MonoBehaviour:
   m_ObjectHideFlags: 0
