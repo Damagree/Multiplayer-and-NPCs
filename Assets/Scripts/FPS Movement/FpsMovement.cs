@@ -1,5 +1,5 @@
 using UnityEngine;
-using Photon.Pun;
+//using Photon.Pun;
 using UnityEngine.Events;
 
 public class FpsMovement : MonoBehaviour
@@ -22,23 +22,23 @@ public class FpsMovement : MonoBehaviour
     [SerializeField] bool usingWalkAnimation;
     [SerializeField] GameObject myMesh;
 
-    private PhotonView photonView;
+    //private PhotonView photonView;
 
     Vector3 velocity;
     bool isGrounded;
 
-    private void Awake() {
-        photonView = GetComponent<PhotonView>();
-        if (photonView.IsMine) {
-            myMesh.SetActive(false);
-        }
-    }
+    //private void Awake() {
+    //    photonView = GetComponent<PhotonView>();
+    //    if (photonView.IsMine) {
+    //        myMesh.SetActive(false);
+    //    }
+    //}
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!photonView.IsMine)
-            return;
+        //if (!photonView.IsMine)
+        //    return;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 

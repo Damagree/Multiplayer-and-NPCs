@@ -316,7 +316,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -440,6 +440,14 @@ MonoBehaviour:
   playerBody: {fileID: 5794136288482887359}
   camera: {fileID: 5794136286930859145}
   defaultFOV: 60
+  moveSpeed: 0.05
+  rotationSpeed: 0.05
+  scrollSpeed: 1
+  minHeight: 0
+  maxHeight: 10
+  anchoredMoveKey: 0
+  anchoredRotateKey: 0
+  destroyOnNotMine: []
 --- !u!114 &4911226247282614104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,6 +605,7 @@ MonoBehaviour:
   usingAnimation: 0
   targetAnimator: {fileID: 0}
   usingWalkAnimation: 0
+  myMesh: {fileID: 0}
 --- !u!114 &1291902035922613656
 MonoBehaviour:
   m_ObjectHideFlags: 0

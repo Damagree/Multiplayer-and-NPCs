@@ -1645,6 +1645,7 @@ MonoBehaviour:
   usingAnimation: 1
   targetAnimator: {fileID: 4859202717444204908}
   usingWalkAnimation: 1
+  myMesh: {fileID: 0}
 --- !u!95 &4859202717444204908
 Animator:
   serializedVersion: 4
@@ -2181,6 +2182,14 @@ MonoBehaviour:
   playerBody: {fileID: 7836828697121308279}
   camera: {fileID: 7836828696761551937}
   defaultFOV: 60
+  moveSpeed: 0.05
+  rotationSpeed: 0.05
+  scrollSpeed: 1
+  minHeight: 0
+  maxHeight: 10
+  anchoredMoveKey: 0
+  anchoredRotateKey: 0
+  destroyOnNotMine: []
 --- !u!114 &8683718729049270160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2304,6 +2313,7 @@ MonoBehaviour:
   usingAnimation: 1
   targetAnimator: {fileID: 4859202717444204908}
   usingWalkAnimation: 1
+  myMesh: {fileID: 0}
 --- !u!114 &3262620857389600080
 MonoBehaviour:
   m_ObjectHideFlags: 0

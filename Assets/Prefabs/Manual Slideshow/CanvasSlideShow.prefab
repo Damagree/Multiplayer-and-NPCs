@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6856746059910365257, guid: 6727f3a8feea5eb4e984aac908b524b0, type: 3}
       propertyPath: m_Name
-      value: Canvas Pitchdeck
+      value: CanvasSlideShow
       objectReference: {fileID: 0}
     - target: {fileID: 6856746060142103660, guid: 6727f3a8feea5eb4e984aac908b524b0, type: 3}
       propertyPath: m_Sprite

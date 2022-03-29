@@ -600,9 +600,14 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  playerInput: {fileID: 0}
+  useVirtualJoystick: 0
+  disableOnMobile: []
+  disableOnDesktop: []
   lockCursor: 1
   rootCameraPosition: {fileID: 8555129667597401950}
   cam: {fileID: 3447450121032767938}
+  parentSwitch: {fileID: 0}
   cinemachine: {fileID: 0}
   turnOffWhenTPP:
   - {fileID: 4293913551379854725}
@@ -614,6 +619,8 @@ MonoBehaviour:
   usingAnimation: 1
   targetAnimator: {fileID: 1242035769658158065}
   usingWalkAnimation: 1
+  movementTypeText: {fileID: 0}
+  usingPhoton: 0
   disableOnNotMine:
   - {fileID: 3447450121032767938}
   - {fileID: 4293913551379854725}
@@ -1323,6 +1330,13 @@ MonoBehaviour:
   playerBody: {fileID: 1242035769658158074}
   camera: {fileID: 3447450121032767936}
   defaultFOV: 60
+  moveSpeed: 0.05
+  rotationSpeed: 0.05
+  scrollSpeed: 1
+  minHeight: 0
+  maxHeight: 10
+  anchoredMoveKey: 0
+  anchoredRotateKey: 0
   destroyOnNotMine:
   - {fileID: 4293913551379854725}
 --- !u!114 &4293913551399367185
@@ -1386,9 +1400,16 @@ MonoBehaviour:
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   m_CustomBlends: {fileID: 0}
   m_CameraCutEvent:
     m_PersistentCalls:

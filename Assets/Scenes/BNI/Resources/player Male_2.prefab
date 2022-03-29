@@ -1954,6 +1954,13 @@ MonoBehaviour:
   playerBody: {fileID: 8737968604741567251}
   camera: {fileID: 5864918541291930088}
   defaultFOV: 60
+  moveSpeed: 0.05
+  rotationSpeed: 0.05
+  scrollSpeed: 1
+  minHeight: 0
+  maxHeight: 10
+  anchoredMoveKey: 0
+  anchoredRotateKey: 0
   destroyOnNotMine:
   - {fileID: 4982289983080279469}
 --- !u!114 &4982289983057619513
