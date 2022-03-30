@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 98835868060574447}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 420949231816602274}
@@ -307,7 +307,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   checkPhoton: 1
-  isSendMessageOnEnter: 1
+  isSendMessageOnEnter: 0
   message: SwitchCinemachineLock
 --- !u!54 &170356568714671726
 Rigidbody:
@@ -1127,7 +1127,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052808445664077848}
-  m_LocalRotation: {x: -0, y: -0.67856795, z: -0, w: 0.7345377}
+  m_LocalRotation: {x: 0, y: -0.67857003, z: 0, w: 0.7345357}
   m_LocalPosition: {x: 19.806, y: 0.17717671, z: 24.094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

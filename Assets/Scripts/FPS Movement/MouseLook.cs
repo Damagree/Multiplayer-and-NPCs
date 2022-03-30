@@ -25,7 +25,7 @@ public class MouseLook : MonoBehaviour
     [SerializeField] KeyCode anchoredRotateKey;
 
     [SerializeField] GameObject[] destroyOnNotMine;
-    private PhotonView photonView;
+    [SerializeField] PhotonView photonView;
     private PlayerMovement playerMovement;
     //CinemachineFreeLook cinemachine;
 
@@ -156,7 +156,10 @@ public class MouseLook : MonoBehaviour
 
     #region ----- Initialize -----
     void InitWithPhoton() {
-        photonView = GetComponentInParent<PhotonView>();
+        if (ReferenceEquals(photonView, null)) {
+            photonView = GetComponentInParent<PhotonView>();
+        }
+        
         if (!photonView.IsMine) {
             foreach (GameObject item in destroyOnNotMine) {
                 Destroy(item);

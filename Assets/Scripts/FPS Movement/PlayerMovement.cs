@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -41,8 +42,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject cinemachine;
 
     [Header("Disable When Switch Movement Type")]
-    [SerializeField] GameObject[] turnOffWhenTPP;
-    [SerializeField] GameObject[] turnOffWhenFPP;
+    public List<GameObject> turnOffWhenTPP;
+    public List<GameObject> turnOffWhenFPP;
 
     [Header("Jump")]
     [SerializeField] float gravity = -9.81f;
@@ -51,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     
     [Header("Animation"), Space(10)]
     [Space(5)] public bool usingAnimation;
-    [SerializeField] Animator targetAnimator;
+    public Animator targetAnimator;
     [SerializeField] bool usingWalkAnimation;
 
     [Header("UI"), Space(10)]
@@ -60,8 +61,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Photon")]
     public bool usingPhoton;
     [SerializeField] GameObject[] disableOnNotMine;
-
-    private PhotonView photonView;
+    [SerializeField] private PhotonView photonView;
 
     Vector3 velocity;
     bool isGrounded;
@@ -136,9 +136,9 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         if (x != 0 || z != 0) {
-            targetAnimator.gameObject.GetComponent<AnimatorPlayer>().SetSpeed(true);
+            gameObject.GetComponent<AnimatorPlayer>().SetSpeed(true);
         } else {
-            targetAnimator.gameObject.GetComponent<AnimatorPlayer>().SetSpeed(false);
+            gameObject.GetComponent<AnimatorPlayer>().SetSpeed(false);
         }
     }
 
@@ -267,7 +267,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void InitWithPhoton() {
-        photonView = GetComponent<PhotonView>();
+        if (ReferenceEquals(photonView, null)) {
+            photonView = GetComponentInParent<PhotonView>();
+        }
+
         if (!photonView.IsMine) {
             foreach (GameObject item in disableOnNotMine) {
                 item.SetActive(false);
@@ -281,8 +284,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Init() {
-        cinemachine = GameObject.FindGameObjectWithTag("Cinemachine");
+    public void Init() {
+        if (ReferenceEquals(cinemachine, null)) {
+            cinemachine = GameObject.FindGameObjectWithTag("Cinemachine");
+        }
 
 #if UNITY_EDITOR
         foreach (var item in disableOnDesktop) {

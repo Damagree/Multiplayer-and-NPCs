@@ -24,9 +24,11 @@ public class TriggerWithUnityEvent : MonoBehaviour {
             return;
         }
 
-        if (!other.gameObject.GetComponent<PhotonView>().IsMine) return;
+        if (!other.gameObject.GetComponentInParent<PhotonView>().IsMine) return;
 
         onTriggerEnter.Invoke();
+        if (!isSendMessageOnEnter) return;
+
         other.SendMessage(message);
     }
 
@@ -38,7 +40,7 @@ public class TriggerWithUnityEvent : MonoBehaviour {
             return;
         }
 
-        if (!other.gameObject.GetComponent<PhotonView>().IsMine) return;
+        if (!other.gameObject.GetComponentInParent<PhotonView>().IsMine) return;
 
         onTriggerExit.Invoke();
     }

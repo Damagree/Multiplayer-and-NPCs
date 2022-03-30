@@ -1,16 +1,19 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Wolf3D.ReadyPlayerMe.AvatarSDK;
 
-public class WebViewTest : MonoBehaviour {
+public class WebViewSample : MonoBehaviour {
+
     public GameObject avatar;
+    public Transform spawnLoadedAvatar;
 
     [SerializeField] private WebView webView;
     [SerializeField] private GameObject loadingLabel = null;
     [SerializeField] private Button displayButton = null;
     [SerializeField] private Button closeButton = null;
 
+    [SerializeField] AvatarUrls avatarUrls;
     [SerializeField] private UnityEvent onAvatarCreatedEvent;
 
     private void Start() {
@@ -50,7 +53,7 @@ public class WebViewTest : MonoBehaviour {
         displayButton.gameObject.SetActive(false);
         closeButton.gameObject.SetActive(false);
 
-
+        avatarUrls.avatarUrl = url;
         AvatarLoader avatarLoader = new AvatarLoader();
         avatarLoader.LoadAvatar(url, null, OnAvatarImported);
     }
@@ -60,6 +63,9 @@ public class WebViewTest : MonoBehaviour {
         this.avatar = avatar;
         loadingLabel.SetActive(false);
         displayButton.gameObject.SetActive(true);
+
+        avatar.transform.SetPositionAndRotation(spawnLoadedAvatar.position, spawnLoadedAvatar.rotation);
+        onAvatarCreatedEvent.Invoke();
 
         Debug.Log("Loaded");
     }

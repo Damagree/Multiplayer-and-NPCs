@@ -14,10 +14,14 @@ public class AnimatorPlayer : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField] FloatParameter floatParameter;
-    [SerializeField] Animator animator;
+    public Animator animator;
 
     private void Start() {
-        animator = gameObject.GetComponent<Animator>();
+        Init();
+    }
+
+    public void Init() {
+        //animator = gameObject.GetComponent<Animator>();
     }
 
     public void SetSpeed(bool isWalk) {
