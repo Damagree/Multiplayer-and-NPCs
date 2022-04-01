@@ -16,7 +16,7 @@ public class MouseLook : MonoBehaviour
     [SerializeField] float defaultFOV;
 
     [Header("AutomaticView Setting")]
-    [SerializeField] float moveSpeed = .05f;
+    //[SerializeField] float moveSpeed = .05f;
     [SerializeField] float rotationSpeed = .05f;
     [SerializeField] float scrollSpeed = 1;
     [SerializeField] float minHeight = 0;
@@ -145,12 +145,6 @@ public class MouseLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
     }
-
-    //void ThirdPersonPerspective(float mouseX, float mouseY) {
-    //    cinemachine = 
-    //    cinemachine.m_XAxis.Value = mouseX;
-    //    cinemachine.m_YAxis.Value = mouseY;
-    //}
 
     #endregion
 

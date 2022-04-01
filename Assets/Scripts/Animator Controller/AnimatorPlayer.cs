@@ -25,6 +25,8 @@ public class AnimatorPlayer : MonoBehaviour
     }
 
     public void SetSpeed(bool isWalk) {
+        if (ReferenceEquals(animator.runtimeAnimatorController, null)) return;
+
         if (isWalk)
             animator.SetFloat(floatParameter.id, floatParameter.positiveValue);
         else

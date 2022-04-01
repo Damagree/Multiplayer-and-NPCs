@@ -129,11 +129,8 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
         // Do Animations
-        if (!usingAnimation)
-            return;
-
-        if (!usingWalkAnimation)
-            return;
+        if (!usingAnimation) return;
+        if (!usingWalkAnimation) return;
 
         if (x != 0 || z != 0) {
             gameObject.GetComponent<AnimatorPlayer>().SetSpeed(true);
@@ -183,6 +180,12 @@ public class PlayerMovement : MonoBehaviour
     #region ----- Initialize ------
 
     void InitMovement() {
+        if (usingPhoton) {
+            if (!photonView.IsMine) {
+                return;
+            }
+        }
+
         switch (movementType) {
             case MovementType.TPP:
                 // disable mouselook script so player will use camera cihemachine instead
@@ -276,7 +279,11 @@ public class PlayerMovement : MonoBehaviour
                 item.SetActive(false);
             }
         } else {
-            cinemachine = GameObject.FindGameObjectWithTag("Cinemachine");
+            if (ReferenceEquals(cinemachine, null)) {
+                cinemachine = GameObject.FindGameObjectWithTag("Cinemachine");
+            }
+            //cinemachine.GetComponent<CinemachineInputProvider>().PlayerIndex = photonView.ViewID;
+            SetupInit();
             InitMovement();
             if (lockCursor) {
                 Cursor.lockState = CursorLockMode.Locked;
@@ -289,6 +296,14 @@ public class PlayerMovement : MonoBehaviour
             cinemachine = GameObject.FindGameObjectWithTag("Cinemachine");
         }
 
+        SetupInit();
+
+        //MouseLook.CursorInit(lockCursor);
+        InitMovement();
+        
+    }
+
+    void SetupInit() {
 #if UNITY_EDITOR
         foreach (var item in disableOnDesktop) {
             item.SetActive(false);
@@ -312,10 +327,6 @@ public class PlayerMovement : MonoBehaviour
         }
         Debug.LogWarning("Using Mobile Devices");
 #endif
-
-        //MouseLook.CursorInit(lockCursor);
-        InitMovement();
-        
     }
 
     #endregion
