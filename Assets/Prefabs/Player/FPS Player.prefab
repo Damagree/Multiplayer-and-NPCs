@@ -358,9 +358,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 500
   playerBody: {fileID: 1459383987917688583}
+  panelLook: {fileID: 0}
   camera: {fileID: 1459383988261354801}
   defaultFOV: 60
-  moveSpeed: 0.05
   rotationSpeed: 0.05
   scrollSpeed: 1
   minHeight: 0
@@ -368,6 +368,7 @@ MonoBehaviour:
   anchoredMoveKey: 0
   anchoredRotateKey: 0
   destroyOnNotMine: []
+  photonView: {fileID: 0}
 --- !u!114 &22664928
 MonoBehaviour:
   m_ObjectHideFlags: 0

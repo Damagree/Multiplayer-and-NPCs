@@ -709,7 +709,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de94e8d74d07b6d48be573b21e792bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
   webView: {fileID: 0}
   loadingLabel: {fileID: 7034556280129767614}
   displayButton: {fileID: 7034556281022856354}
   closeButton: {fileID: 7034556281095172954}
+  onAvatarCreatedEvent:
+    m_PersistentCalls:
+      m_Calls: []

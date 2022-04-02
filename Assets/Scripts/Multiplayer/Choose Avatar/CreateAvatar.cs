@@ -8,6 +8,7 @@ using Photon.Realtime;
 
 public class CreateAvatar : MonoBehaviourPunCallbacks {
 
+    [Header("Main Settings")]
     [SerializeField] private AvatarEntity avatarUrlsSaved;
     [SerializeField] private string AvatarURL = "https://d1a370nemizbjq.cloudfront.net/209a1bc2-efed-46c5-9dfd-edc8a1d9cbe4.glb";
     [SerializeField] private TextMeshProUGUI debugText;
@@ -25,7 +26,7 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
     private void Start() {
         if (isUsingPhoton) {
             if (ReferenceEquals(photonView, null)) {
-                photonView = gameObject.GetComponentInParent<PhotonView>();
+                photonView = gameObject.GetComponent<PhotonView>();
             }
         }
 
@@ -57,6 +58,10 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
 
     private void OnAvatarImported(GameObject avatar) {
         UpdateDebugText($"Avatar imported. [{Time.timeSinceLevelLoad:F2}]");
+
+        //set parent
+        avatar.transform.SetParent(playerBase.transform);
+        avatar.transform.localPosition = Vector3.zero;
     }
 
     private void OnAvatarLoaded(GameObject avatar, AvatarMetaData metaData) {
@@ -65,6 +70,18 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
         } else {
             AvatarLoaded(avatar, metaData);
         }
+    }
+
+    void AvatarLoaded(GameObject avatar, AvatarMetaData metaData) {
+        UpdateDebugText($"Avatar loaded. [{Time.timeSinceLevelLoad:F2}]\n\n{metaData}");
+
+        // Setting up avatar with player controller
+        UpdateDebugText($"Setting up avatar");
+
+        InitAvatar(false, avatar);
+        OnAvatarSetupDone(false);
+
+        UpdateDebugText("Controller Attached");
     }
 
     void AvatarLoadedWithPhoton(GameObject avatar, AvatarMetaData metaData) {
@@ -91,52 +108,36 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
             if (!photonView.IsMine) {
                 return;
             }
-            foreach (GameObject gameObject in turnOnWhenAvatarSetupDone) {
-                if (!ReferenceEquals(gameObject, null)) {
-                    gameObject.SetActive(true);
-                }
-            }
+            TurnOnOffObject();
+        } else {
+            TurnOnOffObject();
+        }
 
-            foreach (GameObject gameObject in turnOffWhenAvatarSetupDone) {
-                if (!ReferenceEquals(gameObject, null)) {
-                    gameObject.SetActive(false);
-                }
-            }
-            foreach (GameObject gameObject in DestroyWhenAvatarSetupDone) {
-                if (!ReferenceEquals(gameObject, null)) {
-                    Destroy(gameObject);
-                }
-            }
-        } 
-        else {
-            foreach (GameObject gameObject in turnOnWhenAvatarSetupDone) {
-                if (!ReferenceEquals(gameObject, null)) {
-                    gameObject.SetActive(true);
-                }
-            }
 
-            foreach (GameObject gameObject in turnOffWhenAvatarSetupDone) {
-                if (!ReferenceEquals(gameObject, null)) {
-                    gameObject.SetActive(false);
-                }
-            }
-            foreach (GameObject gameObject in DestroyWhenAvatarSetupDone) {
-                if (!ReferenceEquals(gameObject, null)) {
-                    Destroy(gameObject);
-                }
+    }
+
+    void TurnOnOffObject() {
+        foreach (GameObject gameObject in turnOnWhenAvatarSetupDone) {
+            if (gameObject is not null) {
+                gameObject.SetActive(true);
             }
         }
 
-        
+        foreach (GameObject gameObject in turnOffWhenAvatarSetupDone) {
+            if (gameObject is not null) {
+                gameObject.SetActive(false);
+            }
+        }
+        foreach (GameObject gameObject in DestroyWhenAvatarSetupDone) {
+            if (gameObject is not null) {
+                Destroy(gameObject);
+            }
+        }
     }
 
     void InitAvatar(bool isPhoton, GameObject avatar) {
         // Setting up avatar with player controller
         UpdateDebugText($"Setting up avatar");
-
-        //set parent
-        avatar.transform.SetParent(playerBase.transform);
-        avatar.transform.localPosition = Vector3.zero;
 
         // set animator to playerBase animator to make photonAnimatorView Work Properly
         Animator animator = playerBase.GetComponent<Animator>();
@@ -147,14 +148,12 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
         createdAvatarAnimator.enabled = false;  // disable animator from the avatar created so we'll use main animator from the base
 
         // reference the animator to all that needed
-        PlayerMovement playerMovement = playerBase.GetComponent<PlayerMovement>();
         AnimatorPlayer animatorPlayer = playerBase.GetComponent<AnimatorPlayer>();
-
-        playerMovement.targetAnimator = animator;
-        playerMovement.turnOffWhenFPP.Add(avatar);
-
         animatorPlayer.animator = animator;
 
+        //PlayerMovement playerMovement = playerBase.GetComponent<PlayerMovement>();
+        //playerMovement.targetAnimator = animator;
+        //playerMovement.turnOffWhenFPP.Add(avatar);
 
         UpdateDebugText("Done setting up avatar");
         if (isPhoton) {
@@ -169,18 +168,6 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
         }
     }
 
-    void AvatarLoaded(GameObject avatar, AvatarMetaData metaData) {
-        UpdateDebugText($"Avatar loaded. [{Time.timeSinceLevelLoad:F2}]\n\n{metaData}");
-
-        // Setting up avatar with player controller
-        UpdateDebugText($"Setting up avatar");
-
-        InitAvatar(false, avatar);
-        OnAvatarSetupDone(false);
-
-        UpdateDebugText("Controller Attached");
-    }
-
     public void UpdateDebugText(string text) {
         if (isUsingPhoton) {
             if (photonView.IsMine) {
@@ -192,14 +179,4 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
         
     }
 
-    //public override void OnJoinedRoom() {
-    //    base.OnJoinedRoom();
-        
-    //    LoadAvatar();
-    //}
-
-    //public override void OnPlayerEnteredRoom(Player newPlayer) {
-    //    base.OnPlayerEnteredRoom(newPlayer);
-    //    AvatarURL = (string)newPlayer.CustomProperties["playerAvatarUrl"];
-    //}
 }

@@ -1472,6 +1472,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   playerInput: {fileID: 0}
+  lookInputAction: {fileID: 0}
   useVirtualJoystick: 0
   disableOnMobile: []
   disableOnDesktop: []
@@ -1497,6 +1498,7 @@ MonoBehaviour:
   - {fileID: 7310717586098138476}
   - {fileID: 8157185405933240619}
   - {fileID: 7431786049814295643}
+  photonView: {fileID: 0}
 --- !u!143 &6862830901457826788
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2249,9 +2251,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 50
   playerBody: {fileID: 5571800023076269973}
+  panelLook: {fileID: 0}
   camera: {fileID: 7310717586098138478}
   defaultFOV: 60
-  moveSpeed: 0.05
   rotationSpeed: 2
   scrollSpeed: 1
   minHeight: 0
@@ -2259,6 +2261,7 @@ MonoBehaviour:
   anchoredMoveKey: 323
   anchoredRotateKey: 324
   destroyOnNotMine: []
+  photonView: {fileID: 0}
 --- !u!114 &8157185405921822399
 MonoBehaviour:
   m_ObjectHideFlags: 0

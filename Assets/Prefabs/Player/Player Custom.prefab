@@ -988,6 +988,7 @@ MonoBehaviour:
   - {fileID: 7516400254116455510}
   - {fileID: 8939460767652382737}
   - {fileID: 7644999822855028065}
+  photonView: {fileID: 0}
 --- !u!143 &5910640826696301278
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1119,6 +1120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1580e93980f31a540b58206d56f407a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avatarUrlsSaved: {fileID: 0}
   AvatarURL: https://d1a370nemizbjq.cloudfront.net/209a1bc2-efed-46c5-9dfd-edc8a1d9cbe4.glb
   debugText: {fileID: 5678354241394419128}
   playerBase: {fileID: 5414363493595479061}
@@ -1127,6 +1129,10 @@ MonoBehaviour:
   - {fileID: 6322579595619468030}
   turnOffWhenAvatarSetupDone:
   - {fileID: 5678354240279306845}
+  DestroyWhenAvatarSetupDone: []
+  ForceDestroyWhenAvatarSetupDone: []
+  isUsingPhoton: 1
+  photonView: {fileID: 0}
 --- !u!1 &5678354240279306845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,7 +2478,6 @@ MonoBehaviour:
   panelLook: {fileID: 5678354240507343221}
   camera: {fileID: 7516400254116455508}
   defaultFOV: 60
-  moveSpeed: 0.05
   rotationSpeed: 1
   scrollSpeed: 1
   minHeight: 0
@@ -2480,6 +2485,7 @@ MonoBehaviour:
   anchoredMoveKey: 323
   anchoredRotateKey: 324
   destroyOnNotMine: []
+  photonView: {fileID: 0}
 --- !u!114 &8939460767630512005
 MonoBehaviour:
   m_ObjectHideFlags: 0
