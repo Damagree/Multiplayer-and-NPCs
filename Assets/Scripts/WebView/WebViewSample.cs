@@ -8,6 +8,7 @@ using TMPro;
 public class WebViewSample : MonoBehaviour {
 
     public GameObject avatar;
+    private const string AVATAR_URL = "AvatarUrl";
     public Transform spawnLoadedAvatar;
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
 
@@ -24,8 +25,10 @@ public class WebViewSample : MonoBehaviour {
         displayButton.onClick.AddListener(DisplayWebView);
         closeButton.onClick.AddListener(HideWebView);
         playerProperties["playerAvatarUrl"] = "";
+
+        LoadAvatarFromUrlCache();
+
 #if UNITY_EDITOR
-        displayButton.interactable = true;
         CustomPropertiesDebug();
 #endif
     }
@@ -53,11 +56,33 @@ public class WebViewSample : MonoBehaviour {
         displayButton.gameObject.SetActive(true);
     }
 
+    private void LoadAvatarFromUrlCache() {
+        UpdateDebugText($"Checking if there's available avatar");
+        loadingLabel.SetActive(true);
+        avatarEntity.avatarUrl = PlayerPrefs.GetString(AVATAR_URL, "");
+
+        string url = avatarEntity.avatarUrl;
+
+        if (string.IsNullOrEmpty(url)) {
+            UpdateDebugText($"There's no url stored");
+            loadingLabel.SetActive(false);
+            return;
+        }
+
+        playerProperties["playerAvatarUrl"] = url; // set customProperties to the photon server
+        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+
+        UpdateDebugText($"URL avatar found! \n Started loading avatar...");
+        AvatarLoader avatarLoader = new AvatarLoader();
+        avatarLoader.LoadAvatar(url, null, OnAvatarImported);
+    }
+
     // WebView callback for retrieving avatar url
     private void OnAvatarCreated(string url) {
         if (avatar) Destroy(avatar);
 
         UpdateDebugText($"Avatar Created");
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
 
         webView.SetVisible(false);
         loadingLabel.SetActive(true);
@@ -65,7 +90,8 @@ public class WebViewSample : MonoBehaviour {
         closeButton.gameObject.SetActive(false);
 
         UpdateDebugText($"Storing url on server cache");
-        avatarEntity.avatarUrl = url.ToString(); // save the urls to scriptableObject
+        avatarEntity.avatarUrl = url; // save the urls to scriptableObject
+        PlayerPrefs.SetString(AVATAR_URL, url); // store it so it can be used when it needed again
 
         UpdateDebugText($"Storing url on server cache");
         playerProperties["playerAvatarUrl"] = url.ToString(); // set customProperties to the photon server
@@ -81,7 +107,6 @@ public class WebViewSample : MonoBehaviour {
         UpdateDebugText($"Avatar Loaded!");
         UpdateDebugText($"Setting up preview avatar");
         this.avatar = avatar;
-        avatarEntity.avatar = avatar; // Try to save game object to the scriptableObject
 
         loadingLabel.SetActive(false);
         displayButton.gameObject.SetActive(true);
@@ -95,6 +120,7 @@ public class WebViewSample : MonoBehaviour {
     public void CustomPropertiesDebug() {
         playerProperties["playerAvatarUrl"] = "https://d1a370nemizbjq.cloudfront.net/209a1bc2-efed-46c5-9dfd-edc8a1d9cbe4.glb";
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+        avatarEntity.avatarUrl = "https://d1a370nemizbjq.cloudfront.net/209a1bc2-efed-46c5-9dfd-edc8a1d9cbe4.glb"; // save the urls to scriptableObject
         //Debug.Log($"playerProperties: {(string)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatarUrl"]}");
     }
 

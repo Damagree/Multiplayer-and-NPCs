@@ -36,20 +36,21 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
     void LoadAvatar() {
         UpdateDebugText($"Get avatar's URL");
 
-        //Debug.Log("Create Avatar Here!!!");
-        foreach (Player player in PhotonNetwork.PlayerList) {
-            if (player.CustomProperties.ContainsKey("playerAvatarUrl") && photonView.OwnerActorNr == player.ActorNumber) {
-                AvatarURL = (string)player.CustomProperties["playerAvatarUrl"];
-                break;
+        // Test using scriptableobject
+        if (photonView.IsMine) {
+            if (!string.IsNullOrEmpty(avatarUrlsSaved.avatarUrl)) {
+                AvatarURL = avatarUrlsSaved.avatarUrl;
+            }
+        } else {
+            foreach (Player player in PhotonNetwork.PlayerList) {
+                if (player.CustomProperties.ContainsKey("playerAvatarUrl") && photonView.OwnerActorNr == player.ActorNumber) {
+                    AvatarURL = (string)player.CustomProperties["playerAvatarUrl"];
+                    break;
+                }
             }
         }
 
-        if (!string.IsNullOrEmpty(avatarUrlsSaved.avatarUrl) && string.IsNullOrEmpty(AvatarURL)) {
-            AvatarURL = avatarUrlsSaved.avatarUrl;
-        }
-
         UpdateDebugText($"avatar url: {AvatarURL}");
-        //Debug.Log($"avatar [{PhotonNetwork.LocalPlayer.ActorNumber}] url: {AvatarURL}");
 
         UpdateDebugText($"Started loading avatar...");
         AvatarLoader avatarLoader = new AvatarLoader();
@@ -72,7 +73,7 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
         }
     }
 
-    void AvatarLoaded(GameObject avatar, AvatarMetaData metaData) {
+    void AvatarLoaded(GameObject avatar, AvatarMetaData metaData = null) {
         UpdateDebugText($"Avatar loaded. [{Time.timeSinceLevelLoad:F2}]\n\n{metaData}");
 
         // Setting up avatar with player controller
@@ -84,7 +85,7 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
         UpdateDebugText("Controller Attached");
     }
 
-    void AvatarLoadedWithPhoton(GameObject avatar, AvatarMetaData metaData) {
+    void AvatarLoadedWithPhoton(GameObject avatar, AvatarMetaData metaData = null) {
         
 
         UpdateDebugText($"Avatar loaded. [{Time.timeSinceLevelLoad:F2}]\n\n{metaData}");

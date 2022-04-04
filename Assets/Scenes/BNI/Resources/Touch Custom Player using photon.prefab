@@ -962,10 +962,10 @@ MonoBehaviour:
   maxDistance: 8
   yMinLimit: 10
   yMaxLimit: 80
-  cameraSpeed: 2
+  cameraSpeed: 1
   pinchSpeed: 1
-  xSpeed: 50
-  ySpeed: 50
+  xSpeed: 15
+  ySpeed: 15
 --- !u!1 &6954668516978058122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetCamera: {fileID: 4542382523609690459}
   TargetPlayer: {fileID: 1670317206235214752}
-  RaycastDistance: 10
+  RaycastDistance: 100
   groundTag: Ground
   worldButtonTag: Interactable
   Destination: {fileID: 6954668516978058126}
