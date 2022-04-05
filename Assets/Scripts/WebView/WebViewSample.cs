@@ -14,12 +14,14 @@ public class WebViewSample : MonoBehaviour {
 
     [SerializeField] private WebView webView;
     [SerializeField] private TextMeshProUGUI debugText;
+    [SerializeField] private TextMeshProUGUI previewText;
     [SerializeField] private GameObject loadingLabel = null;
     [SerializeField] private Button displayButton = null;
     [SerializeField] private Button closeButton = null;
 
     [SerializeField] AvatarEntity avatarEntity;
     [SerializeField] private UnityEvent onAvatarCreatedEvent;
+    [SerializeField] private UnityEvent onLoadAvatarFromCache;
 
     private void Start() {
         displayButton.onClick.AddListener(DisplayWebView);
@@ -54,27 +56,34 @@ public class WebViewSample : MonoBehaviour {
         webView.SetVisible(false);
         closeButton.gameObject.SetActive(false);
         displayButton.gameObject.SetActive(true);
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
     }
 
     private void LoadAvatarFromUrlCache() {
-        UpdateDebugText($"Checking if there's available avatar");
-        loadingLabel.SetActive(true);
+        UpdatePreviewText($"Checking if there's available avatar");
+        //loadingLabel.SetActive(true);
         avatarEntity.avatarUrl = PlayerPrefs.GetString(AVATAR_URL, "");
 
         string url = avatarEntity.avatarUrl;
 
         if (string.IsNullOrEmpty(url)) {
-            UpdateDebugText($"There's no url stored");
-            loadingLabel.SetActive(false);
+            UpdatePreviewText($"Create Your Avatar First!");
+            //loadingLabel.SetActive(false);
             return;
         }
+        onLoadAvatarFromCache.Invoke();
 
         playerProperties["playerAvatarUrl"] = url; // set customProperties to the photon server
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+        UpdatePreviewText($"CLICK HERE TO PREVIEW");
+    }
 
-        UpdateDebugText($"URL avatar found! \n Started loading avatar...");
+    public void LoadAvatar() {
+        UpdatePreviewText($"URL avatar found! \n Started loading avatar...");
+        loadingLabel.SetActive(true);
+        UpdateDebugText($"Loading avatar...");
         AvatarLoader avatarLoader = new AvatarLoader();
-        avatarLoader.LoadAvatar(url, null, OnAvatarImported);
+        avatarLoader.LoadAvatar(avatarEntity.avatarUrl, null, OnAvatarImported);
     }
 
     // WebView callback for retrieving avatar url
@@ -121,6 +130,8 @@ public class WebViewSample : MonoBehaviour {
         playerProperties["playerAvatarUrl"] = "https://d1a370nemizbjq.cloudfront.net/209a1bc2-efed-46c5-9dfd-edc8a1d9cbe4.glb";
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
         avatarEntity.avatarUrl = "https://d1a370nemizbjq.cloudfront.net/209a1bc2-efed-46c5-9dfd-edc8a1d9cbe4.glb"; // save the urls to scriptableObject
+        PlayerPrefs.SetString(AVATAR_URL, "https://d1a370nemizbjq.cloudfront.net/209a1bc2-efed-46c5-9dfd-edc8a1d9cbe4.glb"); // store it so it can be used when it needed again
+
         //Debug.Log($"playerProperties: {(string)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatarUrl"]}");
     }
 
@@ -130,6 +141,12 @@ public class WebViewSample : MonoBehaviour {
     }
 
     public void UpdateDebugText(string text) {
+        if (debugText is null) {
+            return;
+        }
         debugText.text = text;
+    }
+    public void UpdatePreviewText(string text) {
+        previewText.text = text;
     }
 }

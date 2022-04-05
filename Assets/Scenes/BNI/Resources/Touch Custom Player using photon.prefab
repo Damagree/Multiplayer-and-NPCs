@@ -56,8 +56,7 @@ MonoBehaviour:
   - {fileID: 6204356902689284546}
   - {fileID: 1840784754523813714}
   DestroyWhenAvatarSetupDone: []
-  ForceDestroyWhenAvatarSetupDone:
-  - {fileID: 6204356902689284546}
+  ForceDestroyWhenAvatarSetupDone: []
   isUsingPhoton: 1
   photonView: {fileID: 4408610036635342261}
 --- !u!1 &1840784754523813714

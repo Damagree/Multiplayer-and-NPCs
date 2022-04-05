@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3963891d82b6f684b8224a5c1cbe49b2, type: 3}
   m_Name: Ready Player Me
   m_EditorClassIdentifier: 
-  avatarUrl: 
+  avatarUrl: https://d1a370nemizbjq.cloudfront.net/209a1bc2-efed-46c5-9dfd-edc8a1d9cbe4.glb
   jsonAvatar: 
