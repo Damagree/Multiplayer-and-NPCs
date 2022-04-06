@@ -13,8 +13,9 @@ public class AnimatorPlayer : MonoBehaviour
     }
 
     [Header("Parameters")]
-    [SerializeField] FloatParameter floatParameter;
+    public bool isUsingRun;
     public Animator animator;
+    [SerializeField] FloatParameter floatParameter;
 
     private void Start() {
         Init();
@@ -22,6 +23,13 @@ public class AnimatorPlayer : MonoBehaviour
 
     public void Init() {
         //animator = gameObject.GetComponent<Animator>();
+    }
+
+    public void SetSpeed(float speed) {
+        if (ReferenceEquals(animator.runtimeAnimatorController, null)) return;
+
+        animator.SetFloat(floatParameter.id, speed);
+
     }
 
     public void SetSpeed(bool isWalk) {

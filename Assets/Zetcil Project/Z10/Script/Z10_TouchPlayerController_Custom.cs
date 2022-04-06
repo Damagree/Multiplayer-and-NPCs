@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
@@ -23,11 +25,18 @@ public class Z10_TouchPlayerController_Custom : MonoBehaviour
     [Header("Speed Setting")]
     public float playerSpeed = 1;
 
+    [Header("Running Setting")]
+    public bool isRun;
+    public float playerWalkSpeed = 1;
+    public float playerRunSpeed = 3;
+    public TextMeshProUGUI runText;
+
     [Header("Animation Setting")]
     public float Distance;
     public float CompareDistance;
     public UnityEvent IdleAnimation;
     public UnityEvent WalkAnimation;
+    public UnityEvent RunAnimation;
 
     #region --- Private Variables
     private static Vector2 beginTouchPosition;
@@ -37,6 +46,13 @@ public class Z10_TouchPlayerController_Custom : MonoBehaviour
     // Use this for initialization
     void Start() {
         Destination.position = TargetPlayer.position + Offset;
+        if (isRun) {
+            playerSpeed = playerRunSpeed;
+            runText.text = "RUN";
+        } else {
+            playerSpeed = playerWalkSpeed;
+            runText.text = "WALK";
+        }
     }
 
     // Update is called once per frame
@@ -67,6 +83,7 @@ public class Z10_TouchPlayerController_Custom : MonoBehaviour
                     }
                     if (hits[i].collider != null && hits[i].collider.CompareTag(groundTag)) {
                         Destination.position = hits[i].point + Offset;
+                        TargetPlayer.LookAt(Destination); // Make sure the target player always look at the destination
                     }
                 }
             }
@@ -75,11 +92,15 @@ public class Z10_TouchPlayerController_Custom : MonoBehaviour
 
     void FixedUpdate() {
         if (Destination.position != Vector3.zero) {
-            TargetPlayer.LookAt(Destination); // Make sure the target player always look at the destination
+            
             TargetPlayer.transform.position = Vector3.MoveTowards(TargetPlayer.transform.position, Destination.position, playerSpeed * Time.deltaTime);
             Distance = Vector3.Distance(TargetPlayer.transform.position, Destination.position);
             if (Distance > CompareDistance) {
-                WalkAnimation.Invoke();
+                if (isRun) {
+                    RunAnimation.Invoke();
+                } else {
+                    WalkAnimation.Invoke();
+                }
             } else {
                 IdleAnimation.Invoke();
             }
@@ -118,5 +139,16 @@ public class Z10_TouchPlayerController_Custom : MonoBehaviour
             }
         }
         return result;
+    }
+
+    public void SwitchWalkRun() {
+        isRun = !isRun;
+        if (isRun) {
+            playerSpeed = playerRunSpeed;
+            runText.text = "RUN";
+        } else {
+            playerSpeed = playerWalkSpeed;
+            runText.text = "WALK";
+        }
     }
 }
