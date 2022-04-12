@@ -13,7 +13,6 @@ public class AnimatorPlayer : MonoBehaviour
     }
 
     [Header("Parameters")]
-    public bool isUsingRun;
     public Animator animator;
     [SerializeField] FloatParameter floatParameter;
 

@@ -168,7 +168,7 @@ RectTransform:
   m_Children:
   - {fileID: 214821647}
   m_Father: {fileID: 6520414288308376022}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -855,9 +855,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5586624086525667459}
-  - {fileID: 6838255699364190155}
   m_Father: {fileID: 6520414288308376022}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7110469878900062261
 CapsuleCollider:
@@ -885,7 +884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f469c7ae9ffdc7244a1f1db95a32f8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUsingRun: 1
   animator: {fileID: 6855027437243519855}
   floatParameter:
     id: Speed
@@ -1218,6 +1216,7 @@ Transform:
   - {fileID: 4542382523609690458}
   - {fileID: 6954668516978058126}
   - {fileID: 1840784754523813718}
+  - {fileID: 6838255699364190155}
   - {fileID: 1670317206235214752}
   - {fileID: 6954668518078214779}
   - {fileID: 6954668516774019570}
@@ -1280,8 +1279,8 @@ Transform:
   m_LocalScale: {x: 0.51386005, y: 0.51386005, z: 0.51386005}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1670317206235214752}
-  m_RootOrder: 1
+  m_Father: {fileID: 6520414288308376022}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6954668516774019569
 GameObject:
@@ -1313,7 +1312,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6520414288308376022}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6954668516774019571
 MonoBehaviour:
@@ -1451,7 +1450,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6520414288308376022}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6954668518078214780
 MonoBehaviour:
@@ -1467,6 +1466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetCamera: {fileID: 4542382523609690459}
   TargetPlayer: {fileID: 1670317206235214752}
+  followPlayer: {fileID: 6838255699364190156}
   RaycastDistance: 100
   groundTag: Ground
   worldButtonTag: Interactable

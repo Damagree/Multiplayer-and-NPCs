@@ -12,6 +12,7 @@ public class Z10_TouchPlayerController_Custom : MonoBehaviour
     [Header("Main Setting")]
     public Camera TargetCamera;
     public Transform TargetPlayer;
+    public GameObject followPlayer;
     public float RaycastDistance = 10f;
 
     [Header("Collider Tag")]
@@ -95,6 +96,7 @@ public class Z10_TouchPlayerController_Custom : MonoBehaviour
             
             TargetPlayer.transform.position = Vector3.MoveTowards(TargetPlayer.transform.position, Destination.position, playerSpeed * Time.deltaTime);
             Distance = Vector3.Distance(TargetPlayer.transform.position, Destination.position);
+            followPlayer.transform.position = new Vector3(TargetPlayer.position.x, followPlayer.transform.position.y, TargetPlayer.position.z);
             if (Distance > CompareDistance) {
                 if (isRun) {
                     RunAnimation.Invoke();
@@ -145,10 +147,10 @@ public class Z10_TouchPlayerController_Custom : MonoBehaviour
         isRun = !isRun;
         if (isRun) {
             playerSpeed = playerRunSpeed;
-            runText.text = "RUN";
+            if (runText is not null) runText.text = "RUN";
         } else {
             playerSpeed = playerWalkSpeed;
-            runText.text = "WALK";
+            if (runText is not null) runText.text = "WALK";
         }
     }
 }
