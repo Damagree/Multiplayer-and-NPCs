@@ -2892,11 +2892,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f469c7ae9ffdc7244a1f1db95a32f8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 8278709988015662764}
   floatParameter:
     id: Speed
     positiveValue: 1
     negativeValue: 0
-  animator: {fileID: 8278709988015662764}
 --- !u!1 &8861482450002314861
 GameObject:
   m_ObjectHideFlags: 0

@@ -1308,11 +1308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f469c7ae9ffdc7244a1f1db95a32f8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 605634927203059296}
   floatParameter:
     id: Speed
     positiveValue: 1
     negativeValue: 0
-  animator: {fileID: 605634927203059296}
 --- !u!114 &5678354240639260000
 MonoBehaviour:
   m_ObjectHideFlags: 0

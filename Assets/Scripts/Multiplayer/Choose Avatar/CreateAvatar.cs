@@ -25,7 +25,7 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
 
     private void Start() {
         if (isUsingPhoton) {
-            if (ReferenceEquals(photonView, null)) {
+            if (photonView is null) {
                 photonView = gameObject.GetComponent<PhotonView>();
             }
         }
@@ -36,7 +36,6 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
     void LoadAvatar() {
         UpdateDebugText($"Get avatar's URL");
 
-        // Test using scriptableobject
         if (photonView.IsMine) {
             if (!string.IsNullOrEmpty(avatarUrlsSaved.avatarUrl)) {
                 AvatarURL = avatarUrlsSaved.avatarUrl;
@@ -100,7 +99,7 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
 
         // Force Destroy either it's local or not
         foreach (GameObject gameObject in ForceDestroyWhenAvatarSetupDone) {
-            if (!ReferenceEquals(gameObject, null)) {
+            if (gameObject is not null) {
                 Destroy(gameObject);
             }
         }
@@ -113,8 +112,6 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
         } else {
             TurnOnOffObject();
         }
-
-
     }
 
     void TurnOnOffObject() {
@@ -171,7 +168,7 @@ public class CreateAvatar : MonoBehaviourPunCallbacks {
 
     public void UpdateDebugText(string text) {
         if (isUsingPhoton) {
-            if (photonView.IsMine) {
+            if (photonView.IsMine && debugText is not null) {
                 debugText.text = text;
                 return;
             }

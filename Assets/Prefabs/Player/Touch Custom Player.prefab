@@ -500,11 +500,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f469c7ae9ffdc7244a1f1db95a32f8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 6855027437243519855}
   floatParameter:
     id: Speed
     positiveValue: 1
     negativeValue: 0
-  animator: {fileID: 6855027437243519855}
 --- !u!114 &4408610036635342261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1079,10 +1079,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetCamera: {fileID: 4542382523609690459}
   TargetPlayer: {fileID: 1670317206235214752}
+  followPlayer: {fileID: 0}
+  RaycastDistance: 10
   groundTag: Ground
+  worldButtonTag: 
   Destination: {fileID: 6954668516978058126}
   Offset: {x: 0, y: 0, z: 0}
   playerSpeed: 1.5
+  isRun: 0
+  playerWalkSpeed: 1
+  playerRunSpeed: 3
+  runText: {fileID: 0}
   Distance: 0
   CompareDistance: 0
   IdleAnimation:
@@ -1115,6 +1122,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  RunAnimation:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3334945099550364725
 PrefabInstance:
   m_ObjectHideFlags: 0

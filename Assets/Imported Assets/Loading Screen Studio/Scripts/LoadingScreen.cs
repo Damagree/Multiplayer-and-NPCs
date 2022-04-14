@@ -171,10 +171,10 @@ namespace Michsky.LSS
                 instance = Instantiate(Resources.Load<GameObject>("Loading Screens/" + prefabName).GetComponent<LoadingScreen>());
                 DontDestroyOnLoad(instance.gameObject);
                 instance.gameObject.SetActive(true);
-                PhotonNetwork.LoadLevel(sceneName);
+                PhotonNetwork.LoadLevel(sceneName); //Load scene from using photon
 
                 if (fcgHelper == false) {
-                    instance.loadingProcess = PhotonNetwork._AsyncLevelLoadingOperation;
+                    instance.loadingProcess = PhotonNetwork._AsyncLevelLoadingOperation; // make it async
                     instance.loadingProcess.allowSceneActivation = false;
                 } else if (fcgHelper == true) { sceneHelper = sceneName; }
 
